@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"name": "fictionaluni",
+			"path": "."
+		},
+		{
+			"name": "css",
+			"path": "..\\..\\..\\..\\..\\..\\Users\\H Desire\\Downloads\\university-static-master\\university-static-master\\css"
+		},
+		{
+			"name": "images",
+			"path": "..\\..\\..\\..\\..\\..\\Users\\H Desire\\Downloads\\university-static-master\\university-static-master\\images"
+		},
+		{
+			"name": "src",
+			"path": "..\\..\\..\\..\\..\\..\\Users\\H Desire\\Downloads\\university-static-master\\university-static-master\\src"
+		},
+		{
+			"name": "build",
+			"path": "..\\..\\..\\..\\..\\..\\Users\\H Desire\\Downloads\\university-static-master\\university-static-master\\build"
+		}
+	],
+	"settings": {}
+}
