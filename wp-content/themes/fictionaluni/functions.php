@@ -65,11 +65,16 @@
     function university_adjust_queries($query){
    
         // for programs
-        if(!is_admin() AND is_post_type_archive('program') AND $query -> is_main_query()){
-            
+        if(!is_admin() AND is_post_type_archive('program') AND $query -> is_main_query()){            
             $query -> set('orderby','title');
             $query -> set('order','ASC');
             $query -> set('posts_per_page', -1);
+        }
+
+
+        // for campuses
+        if(!is_admin() AND is_post_type_archive('campus') AND $query -> is_main_query()){            
+                  $query -> set('posts_per_page', -1);
         }
         
         // for events
