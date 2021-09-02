@@ -9,29 +9,50 @@ class Search {
         this.searchOverlay = $('.search-overlay');
         this.events();
         this.isOVerlayOpen = false;
+        this.isSpinnerVisible = false;
         this.searchTerm = $('#search-term');
+        this.previousValue
         this.typingTimer ;
+        this.resultsDiv = $('#search-overlay__results');
     }
     //events
     events(){
         this.openButton.on('click',this.openOverlay.bind(this));
         this.closeButton.on('click',this.closeOverlay.bind(this));
-        $(document).on('keyup',this.keyPressDispatcher.bind(this));
-        this.searchTerm.on('keydown', this.typingLogic.bind(this));
+        $(document).on('keydown',this.keyPressDispatcher.bind(this));
+        this.searchTerm.on('keyup', this.typingLogic.bind(this));
         
     }
 
     //methods/functions
     typingLogic(){
-        clearTimeout(this.typingTimer);
-        this.typingTimer = setTimeout(function(){
-            console.log('I am desire test')
-        },2000)
+
+        if(this.searchTerm.val() != this.previousValue.val()){
+            clearTimeout(this.typingTimer);
+
+            if(this.searchTerm.val()){
+                if(!this.isSpinnerVisible){
+                    this.resultsDiv.html("<div class='spinner-loader'></div>");
+                    this.isSpinnerVisible = true;
+                }       
+                this.typingTimer = setTimeout(this.getResults.bind(this),2000);
+            }else {
+                this.resultsDiv.html('');
+                this.isSpinnerVisible = false ;
+            }
+           
+        }
+        
+        this.previousValue = this.searchTerm.val();
     }
 
+    getResults(){
+        this.resultsDiv.html("Yes I ma here for you");
+        this.isSpinnerVisible = false ;
+    }
 
     keyPressDispatcher(e){
-        if(e.keyCode == 83 && !this.isOVerlayOpen){
+        if(e.keyCode == 83 && !this.isOVerlayOpen && !$('input, textarea').is(':focus')){
             this.openOverlay();
         }
         if(e.keyCode == 27  && this.isOVerlayOpen ){
@@ -48,7 +69,7 @@ class Search {
         $('body').removeClass('body-no-scroll');
         this.isOVerlayOpen = false;
     }
-    }
+    
     
 }
 
