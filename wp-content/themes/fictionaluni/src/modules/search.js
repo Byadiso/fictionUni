@@ -47,8 +47,22 @@ class Search {
     }
 
     getResults(){
-        this.resultsDiv.html("Yes I ma here for you");
-        this.isSpinnerVisible = false ;
+       $.getJSON(universityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchTerm.val(), posts => {
+     
+       this.resultsDiv.html(`
+        <h2 class="search-overlay__seaction-title">General Information</h2>
+  
+        ${posts.length ? '<ul class="link-list min-list">' : '<p>No general infor</p>'}
+         ${posts.map(item =>`
+            <li>
+                     <a href="${item.link}">${item.title.rendered}</a>
+            </li>`
+         )}
+            
+       ${posts.length ? '</ul>' : ''} 
+        `);
+        this.isSpinnerVisible = false;
+       });
     }
 
     keyPressDispatcher(e){
