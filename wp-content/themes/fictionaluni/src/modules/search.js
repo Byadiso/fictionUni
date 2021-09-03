@@ -48,26 +48,26 @@ class Search {
     }
 
     getResults(){
-       $.getJSON(universityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchTerm.val(), posts => {
-        $.getJSON(universityData.root_url + '/wp-json/wp/v2/pages?search=' + this.searchTerm.val(), pages => {
-            var combinedResults = posts.concat(pages); 
+        $.when(
+            $.getJSON( universityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchTerm),
+            $.getJSON( universityData.root_url + '/wp-json/wp/v2/page?search=' + this.searchTerm)
+        ).then((posts,pages)=>{
+            var combinedResults = posts.concat(pages);
             this.resultsDiv.html(`
-            <h2 class="search-overlay__seaction-title">General Information</h2>  
-            ${combinedResults.length ? '<ul class="link-list min-list">' : '<p>No general information</p>'}
+            <h2 class="search-overlay__section-title">General Information</h2>  
+            ${combinedResults.length ? '<ul class="link-list min-list">' : '<p> No general information</p>'}
              ${combinedResults.map(item =>`
                 <li>
-                         <a href="${item.link}">${item.title.rendered}</a>
+                         <a href="${item.link}"> ${item.title.rendered} </a> 
                 </li>`
              )}
-                
-           ${posts.length ? '</ul>' : ''} 
-            `);
-            this.isSpinnerVisible = false;
 
-        })
-      
-       });
-    }
+            ${posts.length ? '</ul>' : ''} 
+                `);
+        this.isSpinnerVisible = false;      
+      });
+    };
+     
 
     keyPressDispatcher(e){
         if(e.keyCode == 83 && !this.isOVerlayOpen && !$('input, textarea').is(':focus')){
