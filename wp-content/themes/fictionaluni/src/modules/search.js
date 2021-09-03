@@ -77,8 +77,8 @@ class Search {
     openOverlay(){
         this.searchOverlay.addClass('search-overlay--active');
         $('body').addClass('body-no-scroll');
-        setTimeout(()=> this.searchTerm.focus() , 300);
-      
+        this.searchTerm.val('');
+        setTimeout(()=> this.searchTerm.focus() , 300);      
         this.isOVerlayOpen =true;
     }
     closeOverlay(){
