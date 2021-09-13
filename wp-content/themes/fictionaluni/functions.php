@@ -4,9 +4,7 @@
 
     function university_custom_rest(){
         register_rest_field('post','authorName', array(
-            'get_callback'=>() => { 
-                return get_the_author();
-            }
+            'get_callback'=> function(){ return get_the_author(); }   
         ));
     }
 
