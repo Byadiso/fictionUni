@@ -11,7 +11,19 @@ function universityRegisterSearch(){
 }
 
 function universitySearchResults (){
-    return 'Congratulations, You are alive and you craate a route'
+    return $professors = new WP_Query(array(
+        'post_type' => 'professor'
+    ));
+
+     $professorResults = array();
+
+     while($professors->have_posts()){
+        $professors-> the_post();
+        array_push($professorResults, get_the_title());
+
+     }
+
+    return $professorResults;
 }
 
 
