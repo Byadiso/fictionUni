@@ -4,6 +4,8 @@
 
           //events post type 
         register_post_type('event', array(
+            'capabiity_type' => 'event',
+            'map_meta_cap' => true,
             'show_in_rest' => true,
             'supports'=> array('title','editor','excerpt'),
             'rewrite' => array('slug' => 'events'),
@@ -39,7 +41,7 @@
                 ));
 
 
-                 // proffessor post type 
+                 // professor post type 
                register_post_type('professor', array(
                 'show_in_rest' => true,
                 'supports'=> array('title','editor','thumbnail'),
@@ -74,6 +76,24 @@
             ),
             'menu_icon' => 'dashicons-location-alt'
             ));  
+
+            
+          //Note post type 
+          register_post_type('note', array(
+            'show_in_rest' => true,
+            'supports'=> array('title','editor'),
+            'public' => false,
+            'show_ui' =>true,
+            'labels' =>array(
+                'name' =>'Notes',
+                'add_new_item' => 'Add New Note',
+                'edit_item' => 'Edit Note',
+                'all_item' => 'All Note',
+                'singular_name'=> 'Note'
+            
+            ),
+            'menu_icon' => 'dashicons-welcome-write-blog'
+            )); 
 
 
         }

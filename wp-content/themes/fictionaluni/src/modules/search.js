@@ -109,6 +109,7 @@ class Search {
                     ).join(' ')};
             
                     ${results.professors.length ? '</ul>' : ''}
+                    
                 </div>
                 <div class="one-third">
                     <h2 class="search-overlay__section-title">Campuses</h2>  
@@ -125,7 +126,7 @@ class Search {
            
          `);
 
-        })
+        
     
        
         // $.when(
@@ -144,10 +145,12 @@ class Search {
 
         //     ${posts.length ? '</ul>' : ''};
         //  `);
-        this.isSpinnerVisible = false;  
-      }, ()=>{ 
+   
+        this.isSpinnerVisible = false; 
+    }) 
+      , ()=>{ 
           this.resultsDiv.html('<p>Unexpected error; please try again. </p>');
-      });
+      };
     }
      
 
@@ -166,6 +169,7 @@ class Search {
         this.searchTerm.val('');
         setTimeout(()=> this.searchTerm.focus() , 300);      
         this.isOVerlayOpen =true;
+        return false;
     }
 
     closeOverlay(){
