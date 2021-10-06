@@ -109,4 +109,31 @@
 
     add_action('pre_get_posts', 'university_adjust_queries');
 
+    add_filter('login_headertitle','ourLoginTitle');
+
+    function ourLoginTitle(){
+     return get_loginfo('name');
+    }
+
+    //force note  posts to be private
+
+    add('wp_insert_post_data','makeNotePrivate');
+
+    function makeNotePrivate($data){
+        if($data['post_type'] == 'note' AND  $data['post_status'] != 'trash'){
+            $data['post_status'] = 'private' ;
+        }
+
+       
+
+        return  $data
+
+
+    }
+
+
+
 ?>
+
+
+
