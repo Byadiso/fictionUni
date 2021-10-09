@@ -24,7 +24,10 @@ class MyNotes{
           type:'DELETE',
           success: (response) => {
               console.log('Yes we made it');
-              console.log(response)
+              console.log(response);
+              if(response.userCount < 5){
+                $('.note-limit-message').removeClass('active');
+              }
 
           },
           error: (error)=>{
@@ -100,10 +103,16 @@ createNote (e){
           console.log(response)
 
       },
-      error: (error)=>{
-        console.log('No brother try again');
-        console.log(error)
-      },
+      error: (response)=>{
+        if(response.responseText == 'You have reached your note limit.'){
+          $('.note-limit-message').addClass('active');
+
+        }
+        console.log(response);
+        console.log("sorry")
+
+      }
+      
   })
 
 }
