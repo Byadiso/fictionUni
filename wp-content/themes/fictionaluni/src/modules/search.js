@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 
 class Search {
-    //describe and crete/initiate our object
+    //describe and create/initiate our object
     constructor(){
         this.addSearchHTML();
         this.openButton = $('.js-search-trigger');

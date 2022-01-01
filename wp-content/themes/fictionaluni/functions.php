@@ -8,7 +8,7 @@
         ));
 
         register_rest_field('note','userNoteCount', array(
-            'get_callback'=> function(){ return count_user_posts(get_current_user_id(),'note') }   
+            'get_callback'=> function(){ return count_user_posts(get_current_user_id(),'note'); }   
         ));
     }
 
