@@ -6,6 +6,8 @@
     Version: 1.0
     Author: Desire
     Author URI: https://nganatech.com
+    Text Domain: wcpdomain
+    Domain Path: /languages 
     
     */
 
@@ -14,7 +16,12 @@
         function __construct(){
             add_action('admin_menu', array($this, 'adminPage'));
             add_action('admin_init', array($this, 'settings'));
-            add_filter('the_content', array($this, 'ifWrap'))
+            add_filter('the_content', array($this, 'ifWrap'));
+            add_action('init', array($this, 'languages'));
+        }
+
+        function languages(){
+            load_plugin_textdomain('wcpdomain','false',dirname(plugin_basename(__FILE__)) . '/languages');
         }
 
         function ifWrap($content){
@@ -34,7 +41,7 @@
             }
     // for word counts
             if(get_option('wcp_wordcount','1')){
-                $html .='This post has' . $wordcount. ' words. <br>';
+                $html .=esc_html__('This post has', 'wcpdomain') . " " . $wordcount . " " . __( 'words', 'wcpdomain') . '.<br>';
             }
     // for character count
             if(get_option('wcp_charactercount','1')){
@@ -105,9 +112,10 @@
 
 
         function adminPage(){
-            add_options_page('word count settings', 'word count','manage_options', 'word-count-settings-page', array($this, 'ourHTML'))
+            add_options_page('word count settings', __('Word Count', 'wcpdomain'),'manage_options', 'word-count-settings-page', array($this, 'ourHTML'))
        
            }
+
         function ourHTML(){ ?>
                 <div class="wrap">
                     <h1>Word Count Settings</h1>
